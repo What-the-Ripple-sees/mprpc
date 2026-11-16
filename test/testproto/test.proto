@@ -1,0 +1,48 @@
+syntax = "proto3";//声明protobuf的版本
+
+package fixbug;//声明代码所在的包(即c++中namespace)
+
+//定义下面的选项，表示生成services服务类和rpc方法描述，默认不生成
+option cc_generic_services=true;
+
+message ResultCode {
+  int32 errcode = 1;
+  bytes errmsg  = 2;
+}
+
+message user {
+  bytes  name = 1;
+  uint32 age  = 2;
+  enum Sex{
+    MAN   = 0;
+    WOMAN = 1;
+  }
+  Sex sex = 3;
+}
+
+message LoginRequest
+{
+  bytes name = 1;
+  bytes pwd  = 2;
+}
+
+message LoginResponse {
+  ResultCode result  = 1;
+  bool       success = 2;
+}
+
+message GetListRequest {
+  uint32 userid = 1;
+
+}
+
+message GetListResponse {
+  ResultCode    result      = 1;
+  repeated user frined_list = 2;//定义列表类型
+}
+
+//在protobuf中定义描述rpc方法的类型，即service
+service UserServiceRpc {
+  rpc Login(LoginRequest) returns (LoginResponse);
+  rpc GetFriendList(GetListRequest)returns(GetListResponse);
+}
