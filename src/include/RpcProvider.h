@@ -8,6 +8,7 @@
 #include <functional>
 #include <google/protobuf/descriptor.h>
 #include <unordered_map>
+
 //框架提供的用于发布rpc服务的网络对象类
 class RpcProvider
 {
@@ -32,7 +33,7 @@ private:
                             muduo::Timestamp);
 
     //Closure回调操作，用于序列化rpc响应和网络发送
-    void SendRpcResponse(const muduo::net::TcpConnectionPtr& conn,google::protobuf::Message* message);
+    void SendRpcResponse(const muduo::net::TcpConnectionPtr& conn,google::protobuf::Message* response);
 public:
 
     //提供给外部使用，发布rpc服务的函数接口
