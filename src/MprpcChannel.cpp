@@ -118,10 +118,11 @@ void MprpcChannel::CallMethod(const google::protobuf::MethodDescriptor *method,
         return;
     }
 
-    std::string response_str(recv_buf,0,recv_size);
-    if(!response->ParseFromString(response_str))
+    //std::string recv_buf_str(0,recv_buf,4);//这里用string会出现碰到/0导致提前写入结束？
+    //if(!response->ParseFromString(recv_buf,recv_size))
+    if(!response->ParseFromArray(recv_buf,recv_size))
     {
-        std::cout<<"parse error! response_str:"<<response_str<<std::endl;
+        std::cout<<"parse error! response_str:"<<recv_buf<<std::endl;
         close(clientfd);
         return;
     }
