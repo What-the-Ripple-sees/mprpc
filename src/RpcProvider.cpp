@@ -80,6 +80,9 @@ void RpcProvider::SendRpcResponse(const muduo::net::TcpConnectionPtr &conn, goog
     header_str包括service_name,method_name和后续args_str的长度
 
     见src/rpcheader.proto
+
+    故一次rpc调用请求的字节流为：
+    header_size(固定4bytes)+header_str(包括service_name+method_name+args_size)+args_str
 */
 // 当远端有rpc请求发送时，本端接收到请求并进入该函数
 void RpcProvider::OnMessage(const muduo::net::TcpConnectionPtr &conn,
