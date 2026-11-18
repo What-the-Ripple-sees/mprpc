@@ -19,6 +19,7 @@ void RpcProvider::NotifyService(google::protobuf::Service *service)
         // 获取服务对象的所有服务方法
         const google::protobuf::MethodDescriptor *pmethodDesc = pserviceDesc->method(i);
         std::string method_name = pmethodDesc->name();
+        std::cout<<"Notify one rpc service method:"<<"service_name:"<<service_name<<",method_name:"<<method_name<<std::endl;
         service_info.m_methodMap.insert({method_name, pmethodDesc});
     }
     service_info.m_service = service;
