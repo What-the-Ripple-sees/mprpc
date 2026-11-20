@@ -4,6 +4,7 @@
 #include "friend.pb.h"
 #include "MprpcApplication.h"
 #include "RpcProvider.h"
+#include "Logger.h"
 
 class FriendService : public fixbug::FriendServiceRpc
 {
@@ -38,6 +39,7 @@ public:
 
 int main(int argc, char **argv)
 {
+    //LOG_INFO("first log!");
     // 调用框架的初始化
     MprpcApplication::Init(argc, argv);
 

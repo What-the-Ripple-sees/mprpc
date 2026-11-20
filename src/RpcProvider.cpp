@@ -1,6 +1,7 @@
 #include "RpcProvider.h"
 #include "MprpcApplication.h"
 #include "rpcheader.pb.h"
+#include "Logger.h"
 
 // 提供给外部使用，发布rpc服务的函数接口
 void RpcProvider::NotifyService(google::protobuf::Service *service)
@@ -19,7 +20,8 @@ void RpcProvider::NotifyService(google::protobuf::Service *service)
         // 获取服务对象的所有服务方法
         const google::protobuf::MethodDescriptor *pmethodDesc = pserviceDesc->method(i);
         std::string method_name = pmethodDesc->name();
-        std::cout<<"Notify one rpc service method:"<<"service_name:"<<service_name<<",method_name:"<<method_name<<std::endl;
+        //std::cout<<"Notify one rpc service method:"<<"service_name:"<<service_name<<",method_name:"<<method_name<<std::endl;
+        LOG_INFO("Notify one rpc service method:%s->%s",service_name.c_str(),method_name.c_str());
         service_info.m_methodMap.insert({method_name, pmethodDesc});
     }
     service_info.m_service = service;
